@@ -6,9 +6,9 @@
 
 ## Delivery status
 
-The core research release is implemented locally. **24 of 25 acceptance items are complete.** The dashboard was opened and checked in Chrome: changing the model updates the KPIs, selecting season 2024 shows 493 matches, and all four tabs load their data. The latest local HTTP check returned 200. A real dashboard screenshot was captured for visual review, but the attempt to transfer the image through a `data:` URL was blocked by browser policy, which permits only HTTP/HTTPS and explicitly prohibits workarounds. No screenshot file is included in the repository.
+The core research release is implemented and pushed to the [public GitHub repository](https://github.com/theanh97/algoxpert-sports-quant-lab) on branch `main`. **24 of 25 acceptance items are complete.** The dashboard was opened and checked in Chrome: changing the model updates the KPIs, selecting season 2024 shows 493 matches, and all four tabs load their data. The latest local HTTP check returned 200. A real dashboard screenshot was captured for visual review, but the attempt to transfer the image through a `data:` URL was blocked by browser policy, which permits only HTTP/HTTPS and explicitly prohibits workarounds. No screenshot file is included in the repository.
 
-The repository was not published. No marketing copy was posted, and no paid service or data source was used.
+The GitHub repository is public. No marketing copy was posted, and no paid service or data source was used.
 
 ## Experiment and actual results
 
@@ -112,4 +112,4 @@ The checked-in raw snapshot makes the study runnable offline. Refreshing it requ
 - Football-Data was excluded after reviewing its free-data terms, which do not support commercial or automated model-training use.
 - Dashboard visual and interaction checks passed in Chrome. The repository still needs `artifacts/figures/dashboard_screenshot.png`; browser policy blocked direct transfer of the captured image to a local file, and disallows an alternate route.
 - Streamlit AppTest did not complete even with a 90-second timeout; a retry with a 10-second script timeout also remained inside `AppTest.run` and was interrupted. No passing AppTest result is claimed.
-- Next: capture and inspect the dashboard from a permitted browser session, add the real screenshot to `artifacts/figures/`, then update this checklist. After that, a repository URL can be added before any external publication or portfolio posting.
+- Next: capture and inspect the dashboard through a permitted route, add the real screenshot to `artifacts/figures/`, then update this checklist. Review draft marketing copy before any external post or portfolio submission.

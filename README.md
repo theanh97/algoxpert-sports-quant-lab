@@ -2,6 +2,8 @@
 
 **AlgoXpert Research Initiative | MLS case study | Reproducible probability research**
 
+**Public repository:** [github.com/theanh97/algoxpert-sports-quant-lab](https://github.com/theanh97/algoxpert-sports-quant-lab) (`main`)
+
 This research release compares transparent three-way match probability models, checks calibration, and makes data lineage, temporal splits, uncertainty, and limitations inspectable. It is not a betting product.
 
 ## Current evidence
@@ -59,4 +61,4 @@ The raw files are American Soccer Analysis API data under **CC BY-SA 4.0**. Attr
 - scikit-learn probability calibration: https://scikit-learn.org/stable/modules/calibration.html
 - Football-Data terms (reviewed, not used): https://football-data.co.uk/data.php
 
-Draft marketing assets are not published. Add the repository URL and editorially review all copy before posting.
+Draft marketing assets are not published. Editorially review all copy before posting.
