@@ -1,0 +1,588 @@
+{
+  "source": "American Soccer Analysis public API",
+  "source_license": "CC BY-SA 4.0",
+  "retrieved_utc": "2026-11-26",
+  "games_endpoint": "https://app.americansocceranalysis.com/api/v1/mls/games?status=FullTime",
+  "teams_endpoint": "https://app.americansocceranalysis.com/api/v1/mls/teams",
+  "games_file": "C:/Users/truonglys/Documents/Codex/2026-11-26/x-l-trong-2m-32s-algoxpert/data/raw/asa_mls_games_2026-11-26.json",
+  "teams_file": "C:/Users/truonglys/Documents/Codex/2026-11-26/x-l-trong-2m-32s-algoxpert/data/raw/asa_mls_teams_2026-11-26.json",
+  "games_sha256": "2efcb4ee90880ec50e92a32872dbdd3db7df8d16e7a98ba9df9e70dcabf010fb",
+  "teams_sha256": "0e353bf7eaeed41f6c08c07b4aeeb4c5b786d1e8dd7a6da5437c38a1de6fe14f",
+  "raw_rows": 5998,
+  "status_counts": {
+    "FullTime": 5998
+  },
+  "duplicate_game_ids_removed": 0,
+  "missing_score_rows_in_raw": 0,
+  "missing_date_rows_in_raw": 0,
+  "knockout_rows_in_full_time_snapshot": 266,
+  "regular_season_rows": 5732,
+  "unique_regular_season_game_ids": 5732,
+  "seasons": [
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "first_match_utc": "2013-03-02T21:00:00+00:00",
+  "last_match_utc": "2026-11-08T00:00:00+00:00",
+  "unique_team_ids": 31,
+  "unmapped_team_ids": [],
+  "outcome_counts": {
+    "H": 2806,
+    "A": 1476,
+    "D": 1450
+  },
+  "coverage_by_season": [
+    {
+      "season": 2013,
+      "Knockout": 15,
+      "Regular season": 323
+    },
+    {
+      "season": 2014,
+      "Knockout": 15,
+      "Regular season": 323
+    },
+    {
+      "season": 2015,
+      "Knockout": 17,
+      "Regular season": 340
+    },
+    {
+      "season": 2016,
+      "Knockout": 17,
+      "Regular season": 340
+    },
+    {
+      "season": 2017,
+      "Knockout": 17,
+      "Regular season": 374
+    },
+    {
+      "season": 2018,
+      "Knockout": 17,
+      "Regular season": 391
+    },
+    {
+      "season": 2019,
+      "Knockout": 13,
+      "Regular season": 408
+    },
+    {
+      "season": 2020,
+      "Knockout": 32,
+      "Regular season": 292
+    },
+    {
+      "season": 2021,
+      "Knockout": 13,
+      "Regular season": 459
+    },
+    {
+      "season": 2022,
+      "Knockout": 13,
+      "Regular season": 476
+    },
+    {
+      "season": 2023,
+      "Knockout": 28,
+      "Regular season": 493
+    },
+    {
+      "season": 2024,
+      "Knockout": 29,
+      "Regular season": 493
+    },
+    {
+      "season": 2025,
+      "Knockout": 30,
+      "Regular season": 510
+    },
+    {
+      "season": 2026,
+      "Knockout": 10,
+      "Regular season": 510
+    }
+  ],
+  "goal_range_home": [
+    0,
+    7
+  ],
+  "goal_range_away": [
+    0,
+    7
+  ],
+  "point_in_time_revision_limit": "API exposes last_updated_utc but no historical record versions; this snapshot cannot prove what a consumer knew at every historical cutoff.",
+  "experiment": {
+    "primary_scope": "MLS regular season, full-time matches only",
+    "excluded": "ASA records flagged knockout_game=true (MLS playoffs/cup knockout games)",
+    "target": "three-way home/draw/away result",
+    "test_method": "annual expanding-window holdout; each test season excluded from fitting",
+    "first_test_season_requested": 2019,
+    "model_features": [
+      "home_team_id",
+      "away_team_id",
+      "historical goals/results in prior seasons"
+    ],
+    "market_benchmark": "not run: permitted source snapshot has no odds; Football-Data free-data terms disallow commercial/data-training use"
+  },
+  "evaluation": {
+    "test_seasons": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026
+    ],
+    "test_rows": 3641,
+    "unique_prediction_rows": 25487,
+    "test_games_per_model": 3641,
+    "probability_sum_max_abs_error": 2.220446049250313e-16,
+    "probability_min": 0.03503770034728661,
+    "probability_max": 0.8831655095406461,
+    "calibration_max_season_before_test_for_all": true,
+    "minimum_calibration_cutoff_season": 2018,
+    "season_split_cutoffs_pass": true,
+    "train_test_game_id_overlap_absent": true
+  },
+  "verification": {
+    "status": "PASS",
+    "checks": [
+      {
+        "name": "annual expanding-window cutoff",
+        "passed": true
+      },
+      {
+        "name": "train/test game-id separation",
+        "passed": true
+      },
+      {
+        "name": "temperature fit uses prior seasons only",
+        "passed": true
+      },
+      {
+        "name": "all probabilities in [0,1]",
+        "passed": true
+      },
+      {
+        "name": "probability vectors sum to one",
+        "passed": true,
+        "max_abs_error": 2.220446049250313e-16
+      },
+      {
+        "name": "post-match fields excluded from model inputs",
+        "passed": true,
+        "detail": "Scores are used only as training labels / training outcomes; test scores are never passed to predictors."
+      },
+      {
+        "name": "hyperparameters pre-registered in code",
+        "passed": true,
+        "detail": "No tuning on outer test seasons; constants are fixed in the package."
+      }
+    ],
+    "known_limitations": [
+      "API exposes last_updated_utc but no historical record versions; this snapshot cannot prove what a consumer knew at every historical cutoff.",
+      "The annual holdout forecasts a whole season from prior seasons; it does not simulate daily in-season updates.",
+      "No market benchmark, betting return, or arbitrage claim is made."
+    ]
+  },
+  "calibration_fits": [
+    {
+      "test_season": 2019,
+      "model": "elo",
+      "temperature": 0.8278345768670917,
+      "calibration_rows": 1105,
+      "calibration_max_season": 2018,
+      "calibration_train_log_loss": 1.039218552821632
+    },
+    {
+      "test_season": 2019,
+      "model": "logistic",
+      "temperature": 1.1073355130427824,
+      "calibration_rows": 1105,
+      "calibration_max_season": 2018,
+      "calibration_train_log_loss": 1.02468910565665
+    },
+    {
+      "test_season": 2019,
+      "model": "dixon_coles",
+      "temperature": 0.9403638823684827,
+      "calibration_rows": 1105,
+      "calibration_max_season": 2018,
+      "calibration_train_log_loss": 1.0097675115809366
+    },
+    {
+      "test_season": 2020,
+      "model": "elo",
+      "temperature": 0.8749781717681455,
+      "calibration_rows": 1513,
+      "calibration_max_season": 2019,
+      "calibration_train_log_loss": 1.0399096193557862
+    },
+    {
+      "test_season": 2020,
+      "model": "logistic",
+      "temperature": 1.1566701574335807,
+      "calibration_rows": 1513,
+      "calibration_max_season": 2019,
+      "calibration_train_log_loss": 1.0273526309848904
+    },
+    {
+      "test_season": 2020,
+      "model": "dixon_coles",
+      "temperature": 0.9808585016249851,
+      "calibration_rows": 1513,
+      "calibration_max_season": 2019,
+      "calibration_train_log_loss": 1.0127640547220311
+    },
+    {
+      "test_season": 2021,
+      "model": "elo",
+      "temperature": 0.9243317735668739,
+      "calibration_rows": 1805,
+      "calibration_max_season": 2020,
+      "calibration_train_log_loss": 1.0438001928059408
+    },
+    {
+      "test_season": 2021,
+      "model": "logistic",
+      "temperature": 1.2269508359763142,
+      "calibration_rows": 1805,
+      "calibration_max_season": 2020,
+      "calibration_train_log_loss": 1.0335265208924187
+    },
+    {
+      "test_season": 2021,
+      "model": "dixon_coles",
+      "temperature": 1.0695130588553297,
+      "calibration_rows": 1805,
+      "calibration_max_season": 2020,
+      "calibration_train_log_loss": 1.022163545500846
+    },
+    {
+      "test_season": 2022,
+      "model": "elo",
+      "temperature": 0.9451575617450149,
+      "calibration_rows": 2264,
+      "calibration_max_season": 2021,
+      "calibration_train_log_loss": 1.0444518890692198
+    },
+    {
+      "test_season": 2022,
+      "model": "logistic",
+      "temperature": 1.2403564533434188,
+      "calibration_rows": 2264,
+      "calibration_max_season": 2021,
+      "calibration_train_log_loss": 1.0346758761707353
+    },
+    {
+      "test_season": 2022,
+      "model": "dixon_coles",
+      "temperature": 1.0962848509540841,
+      "calibration_rows": 2264,
+      "calibration_max_season": 2021,
+      "calibration_train_log_loss": 1.025689980041407
+    },
+    {
+      "test_season": 2023,
+      "model": "elo",
+      "temperature": 1.0150719122461032,
+      "calibration_rows": 2740,
+      "calibration_max_season": 2022,
+      "calibration_train_log_loss": 1.0498189736797687
+    },
+    {
+      "test_season": 2023,
+      "model": "logistic",
+      "temperature": 1.2892234717353872,
+      "calibration_rows": 2740,
+      "calibration_max_season": 2022,
+      "calibration_train_log_loss": 1.0387940810791214
+    },
+    {
+      "test_season": 2023,
+      "model": "dixon_coles",
+      "temperature": 1.1513434222341774,
+      "calibration_rows": 2740,
+      "calibration_max_season": 2022,
+      "calibration_train_log_loss": 1.0322341652368203
+    },
+    {
+      "test_season": 2024,
+      "model": "elo",
+      "temperature": 1.0517778308631012,
+      "calibration_rows": 3233,
+      "calibration_max_season": 2023,
+      "calibration_train_log_loss": 1.053587326606518
+    },
+    {
+      "test_season": 2024,
+      "model": "logistic",
+      "temperature": 1.3525298643839558,
+      "calibration_rows": 3233,
+      "calibration_max_season": 2023,
+      "calibration_train_log_loss": 1.044396614717743
+    },
+    {
+      "test_season": 2024,
+      "model": "dixon_coles",
+      "temperature": 1.1989854969794604,
+      "calibration_rows": 3233,
+      "calibration_max_season": 2023,
+      "calibration_train_log_loss": 1.0382124260385779
+    },
+    {
+      "test_season": 2025,
+      "model": "elo",
+      "temperature": 1.0749024498763367,
+      "calibration_rows": 3726,
+      "calibration_max_season": 2024,
+      "calibration_train_log_loss": 1.05602061378357
+    },
+    {
+      "test_season": 2025,
+      "model": "logistic",
+      "temperature": 1.4011007875476713,
+      "calibration_rows": 3726,
+      "calibration_max_season": 2024,
+      "calibration_train_log_loss": 1.048922076911173
+    },
+    {
+      "test_season": 2025,
+      "model": "dixon_coles",
+      "temperature": 1.253372653921838,
+      "calibration_rows": 3726,
+      "calibration_max_season": 2024,
+      "calibration_train_log_loss": 1.0440651306250421
+    },
+    {
+      "test_season": 2026,
+      "model": "elo",
+      "temperature": 1.0926665698910618,
+      "calibration_rows": 4236,
+      "calibration_max_season": 2025,
+      "calibration_train_log_loss": 1.0567060669696122
+    },
+    {
+      "test_season": 2026,
+      "model": "logistic",
+      "temperature": 1.4407632625080373,
+      "calibration_rows": 4236,
+      "calibration_max_season": 2025,
+      "calibration_train_log_loss": 1.052793124902463
+    },
+    {
+      "test_season": 2026,
+      "model": "dixon_coles",
+      "temperature": 1.2873674868025364,
+      "calibration_rows": 4236,
+      "calibration_max_season": 2025,
+      "calibration_train_log_loss": 1.0481743783814133
+    }
+  ],
+  "outer_model_fits": [
+    {
+      "test_season": 2019,
+      "train_min_season": 2013,
+      "train_max_season": 2018,
+      "train_rows": 2091,
+      "test_rows": 408,
+      "test_game_ids_disjoint": true,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.012879108200319563
+    },
+    {
+      "test_season": 2020,
+      "train_min_season": 2013,
+      "train_max_season": 2019,
+      "train_rows": 2499,
+      "test_rows": 292,
+      "test_game_ids_disjoint": true,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.013259919345280112
+    },
+    {
+      "test_season": 2021,
+      "train_min_season": 2013,
+      "train_max_season": 2020,
+      "train_rows": 2791,
+      "test_rows": 459,
+      "test_game_ids_disjoint": true,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.011252087013977204
+    },
+    {
+      "test_season": 2022,
+      "train_min_season": 2013,
+      "train_max_season": 2021,
+      "train_rows": 3250,
+      "test_rows": 476,
+      "test_game_ids_disjoint": true,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.017421163236948072
+    },
+    {
+      "test_season": 2023,
+      "train_min_season": 2013,
+      "train_max_season": 2022,
+      "train_rows": 3726,
+      "test_rows": 493,
+      "test_game_ids_disjoint": true,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.019041011216497625
+    },
+    {
+      "test_season": 2024,
+      "train_min_season": 2013,
+      "train_max_season": 2023,
+      "train_rows": 4219,
+      "test_rows": 493,
+      "test_game_ids_disjoint": true,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.034354635585120384
+    },
+    {
+      "test_season": 2025,
+      "train_min_season": 2013,
+      "train_max_season": 2024,
+      "train_rows": 4712,
+      "test_rows": 510,
+      "test_game_ids_disjoint": true,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.0400705851172494
+    },
+    {
+      "test_season": 2026,
+      "train_min_season": 2013,
+      "train_max_season": 2025,
+      "train_rows": 5222,
+      "test_rows": 510,
+      "test_game_ids_disjoint": true,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.03776305757545155
+    }
+  ],
+  "oof_model_fits": [
+    {
+      "season": 2016,
+      "train_max_season": 2015,
+      "train_rows": 986,
+      "validation_rows": 340,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": 0.030942256154526043
+    },
+    {
+      "season": 2017,
+      "train_max_season": 2016,
+      "train_rows": 1326,
+      "validation_rows": 374,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.004652771022280135
+    },
+    {
+      "season": 2018,
+      "train_max_season": 2017,
+      "train_rows": 1700,
+      "validation_rows": 391,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.01416984776612828
+    },
+    {
+      "season": 2019,
+      "train_max_season": 2018,
+      "train_rows": 2091,
+      "validation_rows": 408,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.012879108200319563
+    },
+    {
+      "season": 2020,
+      "train_max_season": 2019,
+      "train_rows": 2499,
+      "validation_rows": 292,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.013259919345280112
+    },
+    {
+      "season": 2021,
+      "train_max_season": 2020,
+      "train_rows": 2791,
+      "validation_rows": 459,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.011252087013977204
+    },
+    {
+      "season": 2022,
+      "train_max_season": 2021,
+      "train_rows": 3250,
+      "validation_rows": 476,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.017421163236948072
+    },
+    {
+      "season": 2023,
+      "train_max_season": 2022,
+      "train_rows": 3726,
+      "validation_rows": 493,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.019041011216497625
+    },
+    {
+      "season": 2024,
+      "train_max_season": 2023,
+      "train_rows": 4219,
+      "validation_rows": 493,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.034354635585120384
+    },
+    {
+      "season": 2025,
+      "train_max_season": 2024,
+      "train_rows": 4712,
+      "validation_rows": 510,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.0400705851172494
+    },
+    {
+      "season": 2026,
+      "train_max_season": 2025,
+      "train_rows": 5222,
+      "validation_rows": 510,
+      "dixon_coles_optimizer_success": true,
+      "dixon_coles_optimizer_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "dixon_coles_rho": -0.03776305757545155
+    }
+  ]
+}
